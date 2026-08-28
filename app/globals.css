@@ -1,26 +1,247 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────
+   安和生命禮儀 — 設計系統
+   暖色系：米白紙感底、赭紅點綴、金色細線、深咖啡文字
+   ───────────────────────────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* 字體堆疊：Google Fonts 載入失敗時仍會退回系統中文字體 */
+  --font-serif-tc: "Noto Serif TC", "Songti TC", "Source Han Serif TC",
+    "MingLiU", "PMingLiU", "PingFang TC", serif;
+  --font-sans-tc: "Noto Sans TC", "PingFang TC", "Source Han Sans TC",
+    "Microsoft JhengHei", "Heiti TC", sans-serif;
+  --font-latin: "Cormorant Garamond", "Noto Serif TC", Georgia, serif;
+
+  --background: #fcf7f0;
+  --foreground: #2b1d15;
 }
 
 @theme inline {
+  /* 暖色階 */
+  --color-cream: #fcf7f0;
+  --color-cream-deep: #f6ebdc;
+  --color-sand: #eddcc5;
+  --color-linen: #e0cdb2;
+  --color-clay: #c99e73;
+  --color-gold: #d4b183;
+  --color-terracotta: #b96a3c;
+  --color-rust: #96502a;
+  --color-cocoa: #6b4a34;
+  --color-espresso: #3a2718;
+  --color-ink: #2b1d15;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --font-sans: var(--font-sans-tc);
+  --font-serif: var(--font-serif-tc);
+  --font-latin: var(--font-latin);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 自訂 class 一律放進 components layer。
+   Tailwind v4 的 layer 次序是 theme → base → components → utilities，
+   放在 layer 外的規則會蓋掉 utility（例如 absolute 被 position:relative 壓過），
+   收進 layer 才能讓 className 上的 utility 正常覆寫。 */
+@layer components {
+  .font-title {
+    font-family: var(--font-serif-tc);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1.45;
   }
+
+  .eyebrow {
+    font-family: var(--font-latin);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 0.68rem;
+  }
+
+  .vtext {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: 0.35em;
+  }
+
+  .numeral {
+    font-family: var(--font-latin);
+    font-variant-numeric: tabular-nums;
+    font-weight: 300;
+  }
+
+  .rule-gold {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(212, 177, 131, 0.85) 18%,
+      rgba(212, 177, 131, 0.85) 82%,
+      transparent
+    );
+  }
+
+  /* ── 滾動視差 ───────────────────────────────────────────
+     .px-frame 由 JS 寫入 --p（-1 → 1，元素穿越視窗的進度）
+     .px-media 比容器高，靠位移製造前後景速差
+     ─────────────────────────────────────────────────────── */
+  .px-frame {
+    position: relative;
+    overflow: hidden;
+    --px-shift: 10%;
+    --px-over: 15%;
+  }
+
+  .px-media {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(var(--px-over) * -1);
+    height: calc(100% + var(--px-over) * 2);
+    will-change: transform;
+    transform: translate3d(0, calc(var(--p, 0) * var(--px-shift)), 0);
+  }
+
+  /* ── 進場動畫 ─────────────────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+    transition:
+      opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* 細線由左展開，比淡入更有「被設計過」的感覺 */
+  .reveal-rule {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-rule.is-in {
+    transform: scaleX(1);
+  }
+
+  /* ── 紙質顆粒：整站鋪一層極淡噪點，去掉數位的塑膠感 ──── */
+  .grain::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+  }
+
+  /* ── 對話框進場 ──────────────────────────────────────── */
+  .modal-backdrop {
+    animation: modal-fade 0.35s ease-out both;
+  }
+
+  .modal-panel {
+    animation: modal-rise 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* ── 內文排版（Blog 用）──────────────────────────────── */
+  .prose-warm {
+    font-size: 1.0625rem;
+    line-height: 2.05;
+    letter-spacing: 0.03em;
+    color: #4a3325;
+  }
+
+  .prose-warm p {
+    margin-block: 1.35rem;
+  }
+
+  .prose-warm strong {
+    font-weight: 500;
+    color: #2b1d15;
+    background: linear-gradient(transparent 62%, rgba(212, 177, 131, 0.5) 62%);
+  }
+
+  /* 首字放大：長文的傳統開場 */
+  .dropcap::first-letter {
+    font-family: var(--font-serif-tc);
+    font-size: 3.4rem;
+    font-weight: 500;
+    line-height: 1;
+    float: left;
+    margin: 0.35rem 0.6rem 0 0;
+    color: #b96a3c;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  /* 錨點跳轉時避開固定頁首 */
+  scroll-padding-top: 5.5rem;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans-tc);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #b96a3c;
+  color: #fcf7f0;
+}
+
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* 以下規則刻意留在 layer 外，才能覆寫 components layer 的預設動畫 */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal-rule {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .px-media {
+    transform: none !important;
+  }
+
+  .modal-backdrop,
+  .modal-panel {
+    animation: none !important;
+  }
 }
