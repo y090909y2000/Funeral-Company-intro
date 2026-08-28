@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# claude code 的個人設定（模型選擇等，不隨程式碼共用）
+.claude/settings.local.json
+
 # debug
 npm-debug.log*
 yarn-debug.log*
