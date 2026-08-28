@@ -263,7 +263,7 @@ export default function Home() {
               no="01"
               latin="About"
               title="把最忙亂的幾天，變成能好好道別的幾天"
-              lead="安和成立於 1994 年，第一代創辦人原本是廟裡的誦經師。三十年來我們只做一件事：把家屬從跑流程的角色裡拉出來，讓他們有空專心當家人。"
+              lead="如憶成立於 1994 年，第一代創辦人原本是廟裡的誦經師。三十年來我們只做一件事：把家屬從跑流程的角色裡拉出來，讓他們有空專心當家人。"
             />
 
             <Reveal delay={160}>
@@ -407,7 +407,7 @@ export default function Home() {
               <div className="mt-10 flex items-center gap-5">
                 <span className="h-px w-12 bg-gold" />
                 <span className="text-[0.78rem] tracking-[0.24em] text-cream/60">
-                  安和生命禮儀
+                  如憶生命禮儀
                 </span>
               </div>
             </Reveal>

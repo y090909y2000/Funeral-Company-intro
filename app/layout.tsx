@@ -6,11 +6,11 @@ import { VisitorGate } from "./components/visitor";
 
 export const metadata: Metadata = {
   title: {
-    default: "安和生命禮儀｜讓思念，有安放的地方",
-    template: "%s｜安和生命禮儀",
+    default: "如憶生命禮儀｜讓思念，有安放的地方",
+    template: "%s｜如憶生命禮儀",
   },
   description:
-    "安和生命禮儀提供 24 小時到府接體、治喪流程規劃、傳統科儀誦經、會場花藝佈置與後續關懷。一位禮儀師從初終陪到合爐，不轉手、不加價、不催促。",
+    "如憶生命禮儀提供 24 小時到府接體、治喪流程規劃、傳統科儀誦經、會場花藝佈置與後續關懷。一位禮儀師從初終陪到合爐，不轉手、不加價、不催促。",
   keywords: [
     "生命禮儀",
     "殯葬服務",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     "對年合爐",
   ],
   openGraph: {
-    title: "安和生命禮儀｜讓思念，有安放的地方",
+    title: "如憶生命禮儀｜讓思念，有安放的地方",
     description:
       "24 小時到府接體、治喪規劃、傳統科儀與後續關懷。一位禮儀師全程陪伴。",
     locale: "zh_TW",

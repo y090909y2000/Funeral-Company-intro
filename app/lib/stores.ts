@@ -9,7 +9,7 @@ export type Visitor = { name: string | null; asked: boolean };
 const EMPTY_VISITOR: Visitor = { name: null, asked: false };
 
 export const visitorStore = createLocalStore<Visitor>(
-  "anhe.visitor",
+  "ruyi.visitor",
   EMPTY_VISITOR,
   (raw) => {
     try {
@@ -32,7 +32,7 @@ export const visitorStore = createLocalStore<Visitor>(
 /* ── 抽獎結果 ─────────────────────────────────────────────── */
 
 export const prizeStore = createLocalStore<string | null>(
-  "anhe.prize",
+  "ruyi.prize",
   null,
   (raw) => (raw.trim() ? raw.trim() : null),
   (value) => value ?? "",
@@ -41,7 +41,7 @@ export const prizeStore = createLocalStore<string | null>(
 /* ── 小遊戲最高分 ─────────────────────────────────────────── */
 
 export const bestScoreStore = createLocalStore<number>(
-  "anhe.game.best",
+  "ruyi.game.best",
   0,
   (raw) => {
     const parsed = Number(raw);

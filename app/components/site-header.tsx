@@ -60,21 +60,21 @@ export function SiteHeader() {
           <Link
             href="/"
             className="group flex items-baseline gap-3"
-            aria-label="安和生命禮儀 首頁"
+            aria-label="如憶生命禮儀 首頁"
           >
             <span
               className={`font-title text-[1.3rem] leading-none transition-colors duration-500 sm:text-[1.45rem] ${
                 solid ? "text-espresso" : "text-cream"
               }`}
             >
-              安和
+              如憶
             </span>
             <span
               className={`eyebrow hidden pb-px transition-colors duration-500 sm:block ${
                 solid ? "text-clay" : "text-sand/85"
               }`}
             >
-              An Hé · Life Rites
+              Rú Yì · Life Rites
             </span>
           </Link>
 

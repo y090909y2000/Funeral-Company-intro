@@ -1,6 +1,6 @@
 @AGENTS.md
 
-# 安和生命禮儀 — 練習用官網
+# 如憶生命禮儀 — 練習用官網
 
 Next.js 16.3.3（App Router / Turbopack）+ React 19 + Tailwind CSS v4 + TypeScript。
 虛構的殯葬禮儀公司官網，用途是練習。GitHub：
