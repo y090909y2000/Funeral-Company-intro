@@ -6,6 +6,26 @@ Next.js 16.3.3（App Router / Turbopack）+ React 19 + Tailwind CSS v4 + TypeScr
 虛構的殯葬禮儀公司官網，用途是練習。GitHub：
 <https://github.com/y090909y2000/Funeral-Company-intro>
 
+## 目前進度
+
+已完成並推上 GitHub（`main` 分支，工作區乾淨）：
+
+- 三個頁面 `/`、`/blog`、`/game` 都能正常運作
+- 首頁六個區塊：01 關於、02 服務項目、03 治喪流程、04 後續關懷、05 常見問答、
+  06 線上小活動
+- 滾動視差、進場動畫、手機／平板／桌機響應式、手機全螢幕選單
+- 首次到訪詢問稱呼並存 localStorage、回訪直接顯示、首屏問候
+- 抽獎 modal（10% 機率、Email 格式驗證、結果存 localStorage）
+- 接金幣小遊戲（15 秒、面額 1/5/10/50/100、最高分存 localStorage）
+- `npx tsc --noEmit` 與 `npx eslint app` 皆零錯誤零警告
+
+還沒做、可能是下一步的：
+
+- 替換假的聯絡資訊（見「待替換的假資料」）
+- 沒有真正的聯絡表單（Email 驗證目前只用在抽獎 modal）
+- 沒有部署（可考慮 Vercel）
+- 沒有測試
+
 ## 指令
 
 ```bash
